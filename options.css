@@ -262,68 +262,12 @@ body {
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* JIRA Integration Styles */
-.integration-choice {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-}
+/* JIRA Integration Styles - Choice removed, JIRA only */
 
-.radio-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex: 1;
-}
+/* Radio option styles removed - JIRA only integration */
 
-.radio-option:hover {
-    border-color: #6366f1;
-    background: #f8faff;
-}
-
-.radio-option input[type="radio"] {
-    margin: 0;
-    width: 18px;
-    height: 18px;
-}
-
-.radio-option input[type="radio"]:checked + .radio-label {
-    color: #6366f1;
-}
-
-.radio-option:has(input:checked) {
-    border-color: #6366f1;
-    background: #f8faff;
-}
-
-.radio-label {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.radio-label strong {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.radio-label small {
-    font-size: 14px;
-    color: #6b7280;
-    font-weight: normal;
-}
-
-.jira-config, .sheets-config {
-    transition: all 0.3s ease;
-}
-
-.jira-config.hidden, .sheets-config.hidden {
-    display: none;
+.jira-config {
+    /* Always visible - JIRA only integration */
 }
 
 .help-text a {

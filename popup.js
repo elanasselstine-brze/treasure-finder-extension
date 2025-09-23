@@ -1,6 +1,5 @@
 class TreasureFinder {
     constructor() {
-        console.log('🚀 POPUP: Constructor called - initializing Treasure Finder');
         this.currentStep = 1;
         this.screenshotData = null;
         this.currentUrl = '';
@@ -17,11 +16,9 @@ class TreasureFinder {
         
         // Mark as initialized
         document.body.classList.add('ux-tracker-initialized');
-        console.log('✅ POPUP: UXIssueTracker constructor completed, ready to receive messages');
     }
 
     initializeElements() {
-        console.log('Initializing DOM elements...');
         
         // Steps
         this.steps = {
@@ -80,18 +77,14 @@ class TreasureFinder {
             }
         }
         
-        console.log('DOM elements initialized successfully');
     }
 
     attachEventListeners() {
-        console.log('Attaching event listeners...');
         
         if (this.reportBtn) {
             this.reportBtn.addEventListener('click', () => {
-                console.log('Report button clicked');
                 this.startScreenshot();
             });
-            console.log('Report button listener attached');
         }
         
         if (this.skipBtn) {
@@ -118,33 +111,27 @@ class TreasureFinder {
             this.cancelSelectionBtn.addEventListener('click', () => this.cancelPageSelection());
         }
 
-        console.log('📋 POPUP: Event listeners attached successfully');
         
         // Test message reception capability
         this.testMessageReception();
     }
 
     testMessageReception() {
-        console.log('🧪 POPUP: Testing message reception capability...');
         
         // Test that the message listener is working
         setTimeout(() => {
-            console.log('🔍 POPUP: Message listener test - if you see this, popup is ready to receive messages');
         }, 500);
     }
 
     async checkForPendingSelection() {
-        console.log('🔍 POPUP: Checking for pending selection data from background...');
         
         try {
             const response = await chrome.runtime.sendMessage({
                 action: 'getPendingSelection'
             });
             
-            console.log('📨 POPUP: Background response for pending selection:', response);
             
             if (response && response.hasPendingSelection && response.data) {
-                console.log('✅ POPUP: Found pending selection data, processing immediately...');
                 
                 // Process the pending selection as if it just happened
                 await this.handleAreaSelected(
@@ -154,7 +141,6 @@ class TreasureFinder {
                 );
                 
             } else {
-                console.log('📭 POPUP: No pending selection data, showing normal start screen');
                 this.showStep(1);
             }
             
@@ -194,18 +180,15 @@ class TreasureFinder {
     }
 
     async startScreenshot() {
-        console.log('🚀 Report button clicked - starting screenshot process');
         
         try {
             // Start page-based area selection
-            console.log('📱 Starting page selection...');
             await this.startPageSelection();
             
         } catch (error) {
             console.error('❌ Page selection error:', error);
             this.showError('Failed to start area selection. Please try again.');
             
-            // Additional debugging info
             console.error('Error details:', {
                 message: error.message,
                 stack: error.stack,
@@ -215,11 +198,9 @@ class TreasureFinder {
     }
 
     async startPageSelection() {
-        console.log('🔄 Starting page-based area selection');
         
         try {
             // Show selection status step
-            console.log('📋 Showing step 2b (selection status)');
             this.showStep('2b');
             this.isWaitingForSelection = true;
             
@@ -584,7 +565,7 @@ class TreasureFinder {
             // Collect form data
             this.collectFormData();
             
-            // Submit to configured service (JIRA or Google Sheets)
+            // Submit to configured service (JIRA or local storage)
             await this.submitIssue();
             
             // Success animation will handle showing step 5
@@ -622,80 +603,6 @@ class TreasureFinder {
         };
     }
 
-    async submitToGoogleSheets() {
-        // Get stored Google Sheets configuration
-        const config = await this.getGoogleSheetsConfig();
-        
-        if (!config.webhookUrl) {
-            // If no webhook is configured, store locally and show message
-            await this.storeLocally();
-            return;
-        }
-
-        // Prepare data for Google Sheets  
-        const formData = [
-            this.issueData.timestamp,
-            this.issueData.url,
-            this.issueData.summary,
-            this.issueData.task,
-            this.issueData.solution,
-            this.issueData.issueType,
-            this.issueData.customerImpact,
-            this.issueData.effortToFix,
-            '' // Screenshot URL will be filled by Google Apps Script
-        ];
-
-        // Prepare payload - include screenshot if available
-        const payload = {
-            formData: formData
-        };
-        
-        // Add screenshot to the same request if available
-        if (this.screenshotData) {
-            payload.screenshot = this.screenshotData;
-        }
-
-        // Submit everything to Google Sheets via single webhook
-        const response = await fetch(config.webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Google Sheets submission failed:', response.status, errorText);
-            throw new Error(`Failed to submit to Google Sheets: ${response.status} ${response.statusText}`);
-        }
-
-        // Try to parse the response to get screenshot URL
-        try {
-            const result = await response.json();
-            console.log('✅ Successfully submitted to Google Sheets:', result);
-            
-            if (result.screenshotUrl) {
-                console.log('📸 Screenshot saved at:', result.screenshotUrl);
-                // Update local data with screenshot URL
-                this.issueData.screenshotUrl = result.screenshotUrl;
-            }
-            
-            if (result.spreadsheetUrl) {
-                console.log('📊 View your data at:', result.spreadsheetUrl);
-            }
-        } catch (parseError) {
-            console.log('✅ Successfully submitted (could not parse response)');
-        }
-    }
-
-    async getGoogleSheetsConfig() {
-        return new Promise((resolve) => {
-            chrome.storage.sync.get(['googleSheetsConfig'], (result) => {
-                resolve(result.googleSheetsConfig || {});
-            });
-        });
-    }
 
     async storeLocally() {
         // Store the issue data locally if external service is not configured
@@ -708,17 +615,14 @@ class TreasureFinder {
     }
 
     async submitIssue() {
-        // Check configuration to decide between JIRA or Google Sheets
+        // Check configuration to decide between JIRA or local storage
         const config = await this.getIntegrationConfig();
         
         if (config.useJIRA && config.jiraConfig) {
             console.log('🎯 Submitting to JIRA...');
             await this.submitToJIRA(config.jiraConfig);
-        } else if (config.googleSheetsConfig && config.googleSheetsConfig.webhookUrl) {
-            console.log('📊 Submitting to Google Sheets...');
-            await this.submitToGoogleSheets();
         } else {
-            console.log('💾 No integration configured, storing locally...');
+            console.log('💾 No JIRA configured, storing locally...');
             await this.storeLocally();
         }
     }

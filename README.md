@@ -10,7 +10,6 @@ Transform UX issue reporting into an engaging treasure hunt! A powerful Chrome b
 🎬 **Beautiful Progress Animations** - Engaging circular progress with celebration moments  
 🏢 **JIRA Cloud Integration** - Issues automatically appear in your JIRA project with attachments  
 📝 **Smart Issue Forms** - Categorize by impact, effort, and issue type  
-📊 **Google Sheets Fallback** - Alternative integration option available  
 🚀 **Professional Deployment** - Complete guides for organizational rollout  
 ⚙️ **5-Minute Setup** - From installation to first issue in minutes
 
@@ -30,31 +29,20 @@ Transform UX issue reporting into an engaging treasure hunt! A powerful Chrome b
 2. Select the `Design debt reporter` folder
 3. Install the generated `.crx` file
 
-## Setup Google Sheets Integration
+## JIRA Setup
 
-### Step 1: Create Google Apps Script
-
-1. Go to [Google Apps Script](https://script.google.com)
-2. Create a new project
-3. Replace the default code with the contents of `google-sheets-script.js`
-4. Save the project with a meaningful name (e.g., "UX Issue Tracker")
-
-### Step 2: Deploy as Web App
-
-1. Click **Deploy** → **New deployment**
-2. Choose deployment type: **Web app**
-3. Configure settings:
-   - **Execute as**: Me (your Google account)
-   - **Who has access**: Anyone (required for the extension to work)
-4. Click **Deploy**
-5. Copy the web app URL provided
-
-### Step 3: Configure Extension
+### Configure JIRA Integration
 
 1. Right-click the extension icon and select "Options"
-2. Paste the web app URL in the "Google Apps Script Web App URL" field
+2. Enter your JIRA configuration:
+   - **JIRA URL**: Your organization's JIRA Cloud URL (e.g., `https://yourcompany.atlassian.net`)
+   - **Email**: Your JIRA account email
+   - **API Token**: Generate one at [Atlassian Account Settings](https://id.atlassian.com/manage-profile/security/api-tokens)
+   - **Project Key**: The key of the JIRA project where issues should be created
+   - **Issue Type**: Default issue type (Bug, Task, Story, etc.)
 3. Click "Save Settings"
-4. Click "Test Connection" to verify setup
+4. Click "Test JIRA Connection" to verify setup
+5. Use "Debug Project Info" if you encounter any configuration issues
 
 ## Usage
 
@@ -78,7 +66,7 @@ Transform UX issue reporting into an engaging treasure hunt! A powerful Chrome b
 - **View Settings**: Right-click extension → "Options"
 - **Export Data**: Export local data to CSV file
 - **Clear Data**: Remove all locally stored issues
-- **Test Connection**: Verify Google Sheets integration
+- **Test Connection**: Verify JIRA integration
 
 ## File Structure
 
@@ -92,7 +80,8 @@ Design debt reporter/
 ├── options.js                 # Settings functionality
 ├── options.css                # Settings styling
 ├── content.js                 # Content script for web pages
-├── google-sheets-script.js    # Google Apps Script code
+├── jira-integration.js        # JIRA API integration
+├── background.js              # Background service worker
 ├── icons/                     # Extension icons
 │   ├── icon16.png
 │   ├── icon48.png
@@ -117,19 +106,20 @@ The extension captures the following information for each issue:
 | Effort to Fix | Scale of 1-5 (1=very easy, 5=very hard) | No |
 | Has Screenshot | Whether a screenshot was captured | Auto |
 
-## Google Sheets Output
+## JIRA Integration
 
-When configured, issues are automatically added to a Google Sheet with:
-- Automatic spreadsheet creation ("UX Issues Tracker")
-- Formatted headers and auto-resizing columns  
-- Optional screenshot storage in Google Drive
-- Real-time collaboration features
+When configured, issues are automatically created in your JIRA project with:
+- Professional issue structure with all captured details
+- Screenshot attachments for visual context  
+- Proper categorization using JIRA issue types
+- Seamless integration with your existing workflow
 
 ## Privacy & Security
 
-- **No external tracking**: All data stays within your Google account or local browser
+- **No external tracking**: All data stays within your JIRA instance or local browser
 - **Minimal permissions**: Only requests necessary Chrome API access
-- **Local backup**: Issues stored locally if Google Sheets unavailable
+- **Secure authentication**: Uses JIRA API tokens (never stores passwords)
+- **Local backup**: Issues stored locally if JIRA unavailable
 - **User control**: Full control over data export and deletion
 
 ## Troubleshooting
@@ -139,11 +129,12 @@ When configured, issues are automatically added to a Google Sheet with:
 - Check for console errors in popup (F12 → Console)
 - Try reloading the extension
 
-### Google Sheets Issues
-- Ensure web app is deployed with "Anyone" access
-- Test the webhook URL directly
-- Check Google Apps Script execution logs
-- Verify CORS settings aren't blocking requests
+### JIRA Integration Issues
+- Verify your JIRA URL, email, and API token are correct
+- Ensure you have permission to create issues in the specified project
+- Check that the project key exists and is accessible
+- Use the "Debug Project Info" button to diagnose configuration issues
+- The 404 error for issue types is normal and doesn't affect functionality
 
 ### Screenshots Not Capturing
 - Grant necessary tab permissions when prompted
