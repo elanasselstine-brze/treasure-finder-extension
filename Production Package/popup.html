@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Issue Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">✨</div>
+            <div class="header-content">
+                <h2 class="header-title">UX Issue Tracker</h2>
+                <p class="header-subtitle">Spot & report issues</p>
+            </div>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+
+        <!-- Step 1: Initial Report Button -->
+        <div class="step" id="step1">
+            <div class="center-content">
+                <button class="primary-btn" id="reportBtn">Report</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Screenshot Capture -->
+        <div class="step hidden" id="step2">
+            <div class="screenshot-container">
+                <div class="screenshot-status">
+                    <div class="loading-spinner" id="loadingSpinner">📸 Screenshot</div>
+                    <button class="secondary-btn" id="skipBtn">Skip</button>
+                </div>
+                <canvas id="screenshotCanvas" class="hidden"></canvas>
+                <div class="screenshot-preview hidden" id="screenshotPreview">
+                    <img id="screenshotImg" alt="Screenshot preview">
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2b: Page Selection Status -->
+        <div class="step hidden" id="step2b">
+            <div class="page-selection-status">
+                <div class="status-header">
+                    <h3>Select Problem Area on Page</h3>
+                    <p>Switch to the page tab and select the area with the issue</p>
+                </div>
+                
+                <div class="status-content">
+                    <div class="status-icon">🖱️</div>
+                    <p class="status-message">Click and drag on the webpage to highlight the problem area</p>
+                    <small class="status-note">The extension will automatically capture the selected area</small>
+                </div>
+                
+                <div class="status-controls">
+                    <button class="secondary-btn" id="cancelSelectionBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Screenshot Confirmation -->
+        <div class="step hidden" id="step3">
+            <div class="screenshot-confirm">
+                <div class="confirmation-header">
+                    <h3>Preview Selected Area</h3>
+                    <p>This is the screenshot that will be submitted</p>
+                </div>
+                
+                <div class="url-display" id="urlDisplay"></div>
+                
+                <div class="screenshot-preview">
+                    <img id="confirmScreenshotImg" alt="Selected area screenshot">
+                </div>
+                
+                <div class="button-group">
+                    <button class="secondary-btn" id="retakeBtn">🔄 Retake</button>
+                    <button class="primary-btn" id="nextBtn">✅ Looks Good - Next</button>
+                </div>
+                
+                <div class="preview-instructions">
+                    <small>💡 Review the screenshot above. Click "Retake" to select a different area, or "Next" to continue with the form.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Issue Details Form -->
+        <div class="step hidden" id="step4">
+            <form id="issueForm">
+                <div class="form-section">
+                    <label for="description" class="form-label">Description*</label>
+                    <textarea 
+                        id="summary" 
+                        class="form-input" 
+                        placeholder="Summary&#10;What is the pain point or inconsistency?"
+                        rows="3"
+                        required
+                    ></textarea>
+                    <textarea 
+                        id="task" 
+                        class="form-input" 
+                        placeholder="Task&#10;What were you trying to accomplish when you encountered the issue?"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label">Details (optional)</label>
+                    <textarea 
+                        id="solution" 
+                        class="form-input" 
+                        placeholder="Solution&#10;What needs to be done to solve this issue?"
+                        rows="3"
+                    ></textarea>
+                    
+                    <select id="issueType" class="form-select">
+                        <option value="">Type</option>
+                        <option value="quick-win">Quick Win</option>
+                        <option value="ux-optimization">UX Optimization</option>
+                        <option value="redesign">Redesign</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+
+                    <select id="customerImpact" class="form-select">
+                        <option value="">Impact on customers</option>
+                        <option value="1">1 - Very Low</option>
+                        <option value="2">2 - Low</option>
+                        <option value="3">3 - Medium</option>
+                        <option value="4">4 - High</option>
+                        <option value="5">5 - Very High</option>
+                    </select>
+
+                    <select id="effortToFix" class="form-select">
+                        <option value="">Effort to fix</option>
+                        <option value="1">1 - Very Easy</option>
+                        <option value="2">2 - Easy</option>
+                        <option value="3">3 - Medium</option>
+                        <option value="4">4 - Hard</option>
+                        <option value="5">5 - Very Hard</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="primary-btn submit-btn">Submit</button>
+            </form>
+        </div>
+
+        <!-- Step 5: Success -->
+        <div class="step hidden" id="step5">
+            <div class="success-content">
+                <p class="success-message">Hooray! On our way to a better product</p>
+                <button class="primary-btn" id="recordAnotherBtn">Record another</button>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message hidden" id="errorMessage"></div>
+        
+        <!-- Loading Overlay -->
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="loading-spinner">Submitting...</div>
+        </div>
+    </div>
+
+    <script src="jira-integration.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

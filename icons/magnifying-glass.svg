@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Clean, simple magnifying glass icon -->
+  
+  <!-- Lens circle -->
+  <circle 
+    cx="35" 
+    cy="35" 
+    r="25" 
+    fill="none" 
+    stroke="#000000" 
+    stroke-width="6" 
+    stroke-linecap="round"
+  />
+  
+  <!-- Handle -->
+  <line 
+    x1="55" 
+    y1="55" 
+    x2="80" 
+    y2="80" 
+    stroke="#000000" 
+    stroke-width="6" 
+    stroke-linecap="round"
+  />
+  
+  <!-- Optional: Small highlight on lens for depth -->
+  <circle 
+    cx="28" 
+    cy="28" 
+    r="3" 
+    fill="#ffffff" 
+    opacity="0.8"
+  />
+</svg>

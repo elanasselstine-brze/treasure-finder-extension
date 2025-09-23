@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JIRA URL Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; }
+        .input-group { margin: 20px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; font-size: 16px; }
+        .result { margin: 20px 0; padding: 15px; border-radius: 5px; }
+        .cloud { background: #e6f7ff; border: 1px solid #1890ff; }
+        .server { background: #fff7e6; border: 1px solid #fa8c16; }
+        .unknown { background: #f6f6f6; border: 1px solid #d9d9d9; }
+        .check-btn { background: #1890ff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .url-examples { background: #f9f9f9; padding: 15px; margin: 15px 0; }
+        .correct { color: #52c41a; }
+        .incorrect { color: #ff4d4f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 JIRA URL Checker</h1>
+        <p>Let's identify your JIRA type and fix the URL format:</p>
+
+        <div class="input-group">
+            <label for="jiraUrl">Enter your JIRA URL:</label>
+            <input type="text" id="jiraUrl" placeholder="https://yourcompany.atlassian.net or https://jira.yourcompany.com">
+        </div>
+
+        <button class="check-btn" onclick="checkJiraUrl()">🔍 Check JIRA Type</button>
+
+        <div id="result"></div>
+
+        <div class="url-examples">
+            <h3>📋 URL Format Examples:</h3>
+            <p><span class="correct">✅ JIRA Cloud:</span> https://yourcompany.atlassian.net</p>
+            <p><span class="incorrect">❌ Wrong Cloud:</span> https://yourcompany.atlassian.net/jira</p>
+            <p><span class="correct">✅ JIRA Server:</span> https://jira.yourcompany.com</p>
+            <p><span class="incorrect">❌ Wrong Server:</span> https://jira.yourcompany.com/rest/api/3</p>
+        </div>
+    </div>
+
+    <script>
+        function checkJiraUrl() {
+            const url = document.getElementById('jiraUrl').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (!url) {
+                resultDiv.innerHTML = '<div class="result unknown">❌ Please enter a JIRA URL</div>';
+                return;
+            }
+
+            try {
+                const urlObj = new URL(url);
+                let jiraType = 'unknown';
+                let resultClass = 'unknown';
+                let message = '';
+                let recommendations = '';
+
+                // Check for JIRA Cloud
+                if (url.includes('atlassian.net')) {
+                    jiraType = 'cloud';
+                    resultClass = 'cloud';
+                    message = '🌤️ JIRA Cloud Detected';
+                    
+                    // Check URL format
+                    if (url.endsWith('/jira') || url.includes('/jira/')) {
+                        recommendations = `
+                            <p><strong>⚠️ URL Format Issue Detected!</strong></p>
+                            <p>Your URL should be: <strong>${urlObj.protocol}//${urlObj.hostname}</strong></p>
+                            <p><span class="incorrect">❌ Don't use:</span> ${url}</p>
+                            <p><span class="correct">✅ Use instead:</span> ${urlObj.protocol}//${urlObj.hostname}</p>
+                        `;
+                    } else {
+                        recommendations = `
+                            <p>✅ URL format looks correct for JIRA Cloud</p>
+                            <p><strong>API Endpoint:</strong> /rest/api/3/</p>
+                            <p><strong>Authentication:</strong> Email + API Token</p>
+                        `;
+                    }
+                    
+                } else if (url.includes('jira.') || url.includes('/jira') || !url.includes('atlassian')) {
+                    jiraType = 'server';
+                    resultClass = 'server';
+                    message = '🏢 JIRA Server/Data Center Detected';
+                    
+                    recommendations = `
+                        <p><strong>⚠️ This appears to be JIRA Server, but our extension is configured for Cloud!</strong></p>
+                        <p>You have two options:</p>
+                        <ol>
+                            <li><strong>Use JIRA Cloud instead</strong> (recommended - ask your admin for Cloud URL)</li>
+                            <li><strong>Reconfigure extension for Server</strong> (requires different API calls)</li>
+                        </ol>
+                        <p><span class="incorrect">❌ Current issue:</span> Extension is trying Cloud API endpoints on Server instance</p>
+                    `;
+                } else {
+                    message = '🤷‍♂️ Unable to determine JIRA type';
+                    recommendations = `
+                        <p>Please check your URL format:</p>
+                        <ul>
+                            <li><strong>JIRA Cloud:</strong> https://yourcompany.atlassian.net</li>
+                            <li><strong>JIRA Server:</strong> https://jira.yourcompany.com</li>
+                        </ul>
+                    `;
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="result ${resultClass}">
+                        <h3>${message}</h3>
+                        <p><strong>URL:</strong> ${url}</p>
+                        <p><strong>Host:</strong> ${urlObj.hostname}</p>
+                        <p><strong>Type:</strong> ${jiraType.toUpperCase()}</p>
+                        ${recommendations}
+                    </div>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="result unknown">❌ Invalid URL format. Please include https://</div>';
+            }
+        }
+    </script>
+</body>
+</html>

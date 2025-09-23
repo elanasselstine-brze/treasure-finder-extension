@@ -1,0 +1,44 @@
+{
+  "name": "treasure-finder",
+  "version": "1.0.0",
+  "description": "Chrome extension for spotting and reporting UX issues like discovering treasure",
+  "main": "manifest.json",
+  "scripts": {
+    "build": "npm run package",
+    "package": "zip -r treasure-finder-v$npm_package_version.zip manifest.json popup.html popup.js content.js background.js options.html options.js jira-integration.js styles.css options.css icons/",
+    "package:full": "zip -r treasure-finder-full-v$npm_package_version.zip . -x node_modules/\\* .git/\\* build/\\* \\*.zip",
+    "version": "npm run build && git add .",
+    "release:patch": "npm version patch && git push && git push --tags",
+    "release:minor": "npm version minor && git push && git push --tags",
+    "release:major": "npm version major && git push && git push --tags",
+    "clean": "rm -f *.zip"
+  },
+  "keywords": [
+    "chrome-extension", 
+    "ux", 
+    "jira", 
+    "bug-tracking",
+    "user-experience",
+    "issue-reporting",
+    "screenshot",
+    "treasure-finder"
+  ],
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@company.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/treasure-finder-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/treasure-finder-extension/issues"
+  },
+  "homepage": "https://github.com/yourusername/treasure-finder-extension#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

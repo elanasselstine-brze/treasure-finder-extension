@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UX Issue Tracker - Promotional Asset Creator</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            background: #f5f5f5;
+        }
+        .container { 
+            max-width: 1000px; 
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .asset-template {
+            border: 2px dashed #ccc;
+            margin: 20px 0;
+            padding: 20px;
+            text-align: center;
+            background: #f9f9f9;
+            position: relative;
+        }
+        .dimensions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #007cff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .screenshot-guide {
+            background: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #2196f3;
+            margin: 20px 0;
+        }
+        .steps {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #28a745;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .download-btn {
+            background: #007cff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .template-canvas {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 UX Issue Tracker - Chrome Web Store Assets</h1>
+        <p>Create professional promotional materials for your Chrome Web Store listing.</p>
+
+        <h2>📸 Required Screenshots (1280x800 pixels)</h2>
+        
+        <div class="screenshot-guide">
+            <h3>📋 Screenshot Checklist</h3>
+            <p>You need 5 screenshots showing the extension workflow:</p>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">1280x800</div>
+            <h3>1. Extension Icon in Toolbar</h3>
+            <p>Show your extension icon in the Chrome toolbar</p>
+            <div class="steps">
+                <div class="step" data-step="1">Open any website (like google.com)</div>
+                <div class="step" data-step="2">Make sure extension icon is visible in toolbar</div>
+                <div class="step" data-step="3">Take screenshot of browser window</div>
+                <div class="step" data-step="4">Crop to 1280x800 focusing on the toolbar area</div>
+            </div>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">1280x800</div>
+            <h3>2. Area Selection in Action</h3>
+            <p>Show the drag-to-select functionality</p>
+            <div class="steps">
+                <div class="step" data-step="1">Click extension → Report</div>
+                <div class="step" data-step="2">Start dragging to select an area</div>
+                <div class="step" data-step="3">Capture the selection overlay in action</div>
+                <div class="step" data-step="4">Show the blue selection rectangle</div>
+            </div>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">1280x800</div>
+            <h3>3. Screenshot Preview</h3>
+            <p>Show the confirmation screen</p>
+            <div class="steps">
+                <div class="step" data-step="1">Complete area selection</div>
+                <div class="step" data-step="2">Screenshot the preview popup</div>
+                <div class="step" data-step="3">Show "Looks Good - Next" button</div>
+                <div class="step" data-step="4">Include the URL display</div>
+            </div>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">1280x800</div>
+            <h3>4. Feedback Form</h3>
+            <p>Show the detailed issue reporting form</p>
+            <div class="steps">
+                <div class="step" data-step="1">Navigate to the form step</div>
+                <div class="step" data-step="2">Fill out some example data</div>
+                <div class="step" data-step="3">Show all form fields clearly</div>
+                <div class="step" data-step="4">Highlight the structured approach</div>
+            </div>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">1280x800</div>
+            <h3>5. JIRA Integration Result</h3>
+            <p>Show a created JIRA issue</p>
+            <div class="steps">
+                <div class="step" data-step="1">Complete the form submission</div>
+                <div class="step" data-step="2">Open JIRA in another tab</div>
+                <div class="step" data-step="3">Navigate to the created issue</div>
+                <div class="step" data-step="4">Screenshot showing the rich formatting and attached image</div>
+            </div>
+        </div>
+
+        <h2>🎨 Promotional Graphics</h2>
+
+        <div class="asset-template">
+            <div class="dimensions">440x280</div>
+            <h3>Small Promotional Tile</h3>
+            <canvas id="smallTile" class="template-canvas" width="440" height="280"></canvas>
+            <button class="download-btn" onclick="downloadCanvas('smallTile', 'small-promo-tile.png')">
+                Download Template
+            </button>
+        </div>
+
+        <div class="asset-template">
+            <div class="dimensions">920x680</div>  
+            <h3>Large Promotional Tile</h3>
+            <canvas id="largeTile" class="template-canvas" width="460" height="340"></canvas>
+            <button class="download-btn" onclick="downloadCanvas('largeTile', 'large-promo-tile.png')">
+                Download Template  
+            </button>
+            <p><small>Canvas shown at 50% scale for display</small></p>
+        </div>
+
+        <h2>📋 Quick Tools</h2>
+
+        <div class="steps">
+            <h3>Screenshot Tools (Free)</h3>
+            <div class="step" data-step="🖥️">Mac: Cmd+Shift+4 for area selection</div>
+            <div class="step" data-step="🖥️">Windows: Snipping Tool or Snip & Sketch</div>
+            <div class="step" data-step="🌐">Online: Photopea.com (free Photoshop alternative)</div>
+            <div class="step" data-step="📱">Browser: DevTools for exact pixel measurements</div>
+        </div>
+
+        <h2>✅ Final Checklist</h2>
+        <div class="screenshot-guide">
+            <p><strong>Before uploading to Chrome Web Store:</strong></p>
+            <ul>
+                <li>✅ All screenshots are exactly 1280x800 pixels</li>
+                <li>✅ Screenshots show clear, readable text</li>
+                <li>✅ Extension functionality is obvious in each image</li>
+                <li>✅ Images look professional (good lighting, clean backgrounds)</li>
+                <li>✅ Promotional graphics created</li>
+                <li>✅ Privacy policy written</li>
+            </ul>
+        </div>
+
+        <div class="steps">
+            <h3>🚀 Ready to Publish?</h3>
+            <div class="step" data-step="1">Create ZIP of "Production Package" directory</div>
+            <div class="step" data-step="2">Go to Chrome Developer Console</div>
+            <div class="step" data-step="3">Upload ZIP and screenshots</div>
+            <div class="step" data-step="4">Set visibility to "UNLISTED"</div>
+            <div class="step" data-step="5">Submit for review!</div>
+        </div>
+    </div>
+
+    <script>
+        // Create template graphics
+        function createSmallTileTemplate() {
+            const canvas = document.getElementById('smallTile');
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 440, 280);
+            gradient.addColorStop(0, '#007cff');
+            gradient.addColorStop(1, '#0056d3');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 440, 280);
+            
+            // Main text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('UX Issue Tracker', 220, 120);
+            
+            // Subtitle
+            ctx.font = '18px Arial';
+            ctx.fillText('One-click JIRA reporting', 220, 150);
+            
+            // Icon placeholder
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(190, 180, 60, 60);
+            ctx.font = '12px Arial';
+            ctx.fillText('Icon Here', 220, 215);
+        }
+
+        function createLargeTileTemplate() {
+            const canvas = document.getElementById('largeTile');
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#f8f9fa';
+            ctx.fillRect(0, 0, 460, 340);
+            
+            // Left side - webpage mockup
+            ctx.fillStyle = '#e9ecef';
+            ctx.fillRect(20, 40, 200, 260);
+            ctx.fillStyle = '#6c757d';
+            ctx.font = '12px Arial';
+            ctx.fillText('Webpage with', 30, 100);
+            ctx.fillText('UX Issue', 30, 120);
+            
+            // Selection box
+            ctx.strokeStyle = '#007cff';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(50, 140, 120, 80);
+            
+            // Right side - JIRA mockup
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(240, 40, 200, 260);
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([]);
+            ctx.strokeRect(240, 40, 200, 260);
+            
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('JIRA Issue Created', 250, 70);
+            
+            // Arrow
+            ctx.fillStyle = '#28a745';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('→', 215, 170);
+            
+            // Title
+            ctx.fillStyle = '#007cff';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('From Problem to JIRA', 230, 30);
+            ctx.font = '16px Arial';
+            ctx.fillText('in Seconds', 230, 320);
+        }
+
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Initialize templates
+        createSmallTileTemplate();
+        createLargeTileTemplate();
+    </script>
+</body>
+</html>

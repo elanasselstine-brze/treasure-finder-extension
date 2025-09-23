@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Issue Tracker - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>UX Issue Tracker Settings</h1>
+            <p class="subtitle">Configure issue tracking integration</p>
+        </header>
+
+        <div class="content">
+            <!-- Integration Choice -->
+            <div class="section">
+                <h2>Choose Integration Type</h2>
+                <div class="integration-choice">
+                    <label class="radio-option">
+                        <input type="radio" name="integrationType" value="jira" id="useJIRA">
+                        <span class="radio-label">
+                            <strong>🎯 JIRA Integration</strong>
+                            <small>Professional issue tracking with full JIRA features</small>
+                        </span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="integrationType" value="sheets" id="useSheets">
+                        <span class="radio-label">
+                            <strong>📊 Google Sheets</strong>
+                            <small>Simple spreadsheet tracking</small>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- JIRA Configuration -->
+            <div class="section jira-config hidden" id="jiraSection">
+                <h2>JIRA Configuration</h2>
+                <p class="description">
+                    Configure direct JIRA integration to create professional issues with screenshots.
+                </p>
+
+                <div class="form-group">
+                    <label for="jiraUrl">JIRA Cloud URL:</label>
+                    <input 
+                        type="url" 
+                        id="jiraUrl" 
+                        class="form-input"
+                        placeholder="https://yourcompany.atlassian.net"
+                    >
+                    <div class="help-text">
+                        Your JIRA Cloud URL (e.g., https://yourcompany.atlassian.net)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraEmail">Email:</label>
+                    <input 
+                        type="email" 
+                        id="jiraEmail" 
+                        class="form-input"
+                        placeholder="your-email@company.com"
+                    >
+                    <div class="help-text">
+                        Your JIRA Cloud account email address
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraApiToken">API Token:</label>
+                    <input 
+                        type="password" 
+                        id="jiraApiToken" 
+                        class="form-input"
+                        placeholder="Your JIRA API token"
+                    >
+                    <div class="help-text">
+                        <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">
+                            Create API token here ↗
+                        </a> (Required for JIRA Cloud)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraProject">Project Key:</label>
+                    <input 
+                        type="text" 
+                        id="jiraProject" 
+                        class="form-input"
+                        placeholder="PROJ"
+                        style="text-transform: uppercase;"
+                    >
+                    <div class="help-text">
+                        JIRA project key (e.g., PROJ, UX, BUG)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraIssueType">Issue Type:</label>
+                    <select id="jiraIssueType" class="form-input">
+                        <option value="Bug">Bug</option>
+                        <option value="Task">Task</option>
+                        <option value="Story">Story</option>
+                        <option value="Improvement">Improvement</option>
+                    </select>
+                    <div class="help-text">
+                        JIRA issue type for UX issues
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="testJIRABtn" class="test-btn">Test JIRA Connection</button>
+                    <button type="button" id="debugJIRABtn" class="test-btn" style="margin-left: 10px;">🔍 Debug Project Info</button>
+                    <button type="button" id="testIssueBtn" class="test-btn" style="margin-left: 10px;">🧪 Test Issue Types</button>
+                </div>
+            </div>
+
+            <!-- Google Sheets Configuration -->
+            <div class="section sheets-config hidden" id="sheetsSection">
+                <h2>Google Sheets Integration</h2>
+                <p class="description">
+                    To enable automatic submission to Google Sheets, you need to create a Google Apps Script 
+                    web app and provide the webhook URL below.
+                </p>
+
+                <div class="form-group">
+                    <label for="webhookUrl">Google Apps Script Web App URL:</label>
+                    <input 
+                        type="url" 
+                        id="webhookUrl" 
+                        class="form-input"
+                        placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+                    >
+                    <div class="help-text">
+                        The webhook URL from your deployed Google Apps Script web app.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="screenshotWebhook">Screenshot Webhook URL (optional):</label>
+                    <input 
+                        type="url" 
+                        id="screenshotWebhook" 
+                        class="form-input"
+                        placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+                    >
+                    <div class="help-text">
+                        Optional: Separate webhook for handling screenshot uploads to Google Drive.
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="primary-btn" id="saveBtn">Save Settings</button>
+                    <button type="button" class="secondary-btn" id="testBtn">Test Connection</button>
+                </div>
+
+                <div class="status-message hidden" id="statusMessage"></div>
+            </div>
+
+            <div class="section">
+                <h2>Setup Instructions</h2>
+                <ol class="instructions">
+                    <li>Go to <a href="https://script.google.com" target="_blank">Google Apps Script</a></li>
+                    <li>Create a new project</li>
+                    <li>Copy and paste the code from <code>google-sheets-script.js</code> file</li>
+                    <li>Deploy the script as a web app:
+                        <ul>
+                            <li>Click "Deploy" → "New deployment"</li>
+                            <li>Choose type: "Web app"</li>
+                            <li>Execute as: "Me"</li>
+                            <li>Who has access: "Anyone"</li>
+                            <li>Click "Deploy"</li>
+                        </ul>
+                    </li>
+                    <li>Copy the web app URL and paste it in the field above</li>
+                    <li>Click "Save Settings"</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>Local Data</h2>
+                <p class="description">
+                    If Google Sheets is not configured, issues are stored locally in the browser.
+                </p>
+                
+                <div class="button-group">
+                    <button type="button" class="secondary-btn" id="exportBtn">Export Local Data</button>
+                    <button type="button" class="danger-btn" id="clearBtn">Clear Local Data</button>
+                </div>
+
+                <div class="data-count">
+                    <span id="dataCount">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="jira-integration.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>

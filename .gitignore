@@ -1,0 +1,47 @@
+# Build outputs
+build/
+dist/
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if using npm)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Sensitive data
+secrets/
+config.local.js
+
+# Chrome extension development
+*.pem
+*.crx
+
+# Test coverage
+coverage/
+
+# Editor directories and files
+.vscode/
+*.swp
+*.swo
+*~

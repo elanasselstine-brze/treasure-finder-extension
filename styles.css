@@ -1,0 +1,563 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background: white;
+    color: #4B4B51;
+    line-height: 1.5;
+    width: 400px;
+    margin: 0;
+    padding: 0; /* Remove padding - no shadow needed */
+}
+
+.container {
+    width: 400px;
+    min-height: auto; /* Remove fixed height */
+    background: white;
+    border: none; /* Remove border */
+    border-radius: 12px; /* Slight rounding for Chrome popup */
+    box-shadow: none; /* Remove shadow - Chrome provides its own */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 12px 20px; /* Much tighter padding */
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0; /* Lighter border */
+    position: relative;
+}
+
+.header-icon {
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4B4B51;
+    margin: 0;
+}
+
+.header-subtitle {
+    font-size: 14px;
+    color: #4B4B51;
+    margin: 2px 0 0 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #f5f5f5;
+}
+
+/* Steps */
+.step {
+    padding: 16px 20px; /* Much tighter padding to match example */
+}
+
+.step.hidden {
+    display: none;
+}
+
+/* Step 1 - Initial Report */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto; /* Remove fixed height */
+    padding: 20px 0; /* Reduced vertical padding for tighter design */
+}
+
+.primary-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.primary-btn:hover {
+    background: #5856eb;
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+}
+
+/* Step 2 - Screenshot Capture */
+.screenshot-container {
+    text-align: center;
+    min-height: auto; /* Remove fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0; /* Reduced padding for tighter design */
+}
+
+.screenshot-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loading-spinner {
+    font-size: 16px;
+    color: #4B4B51;
+}
+
+.screenshot-preview {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot-preview img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+}
+
+/* Step 2b - Page Selection Status */
+.page-selection-status {
+    padding: 20px;
+    text-align: center;
+}
+
+.status-header {
+    margin-bottom: 24px;
+}
+
+.status-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4B4B51;
+    margin-bottom: 8px;
+}
+
+.status-header p {
+    font-size: 14px;
+    color: #4B4B51;
+    margin: 0;
+}
+
+.status-content {
+    margin-bottom: 24px;
+}
+
+.status-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.status-message {
+    font-size: 14px;
+    color: #4B4B51;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.status-note {
+    font-size: 12px;
+    color: #4B4B51;
+    font-style: italic;
+}
+
+.status-controls {
+    display: flex;
+    justify-content: center;
+}
+
+/* Step 3 - Screenshot Confirmation */
+.screenshot-confirm {
+    text-align: center;
+    padding: 16px;
+}
+
+.confirmation-header {
+    margin-bottom: 16px;
+}
+
+.confirmation-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4B4B51;
+    margin-bottom: 4px;
+}
+
+.confirmation-header p {
+    font-size: 14px;
+    color: #4B4B51;
+    margin: 0;
+}
+
+.url-display {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #4B4B51;
+    margin-bottom: 16px;
+    word-break: break-all;
+    border: 1px solid #e9ecef;
+}
+
+.screenshot-preview {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    max-width: 100%;
+}
+
+.screenshot-preview img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.preview-instructions {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.preview-instructions small {
+    color: #4B4B51;
+    font-size: 12px;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Preview Loading State */
+.preview-loading {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.preview-loading h3 {
+    margin: 20px 0 10px 0;
+    color: #4B4B51;
+    font-size: 16px;
+}
+
+.preview-loading p {
+    margin: 0;
+    color: #4B4B51;
+    font-size: 14px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2196F3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Step 4 - Form */
+.form-section {
+    margin-bottom: 12px; /* Even tighter spacing for compact design */
+}
+
+.form-label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-input, .form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 12px;
+}
+
+.form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+textarea.form-input {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 16px;
+}
+
+/* Step 5 - Success */
+.success-content {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-message {
+    font-size: 18px;
+    color: #4B4B51;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.error-message {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 16px 20px;
+    font-size: 14px;
+    border: 1px solid #fecaca;
+}
+
+/* === TREASURE SUBMISSION ANIMATION === */
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.treasure-submission-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Circular Progress Animation */
+.circular-progress {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.progress-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+}
+
+.progress-circle-bg {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 8;
+}
+
+.progress-circle-fill {
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292; /* 2 * π * 54 (circumference) */
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 0.1s ease-out;
+}
+
+.progress-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.3;
+    max-width: 80px;
+}
+
+/* Celebration Step */
+.celebration-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    animation: celebration-appear 0.5s ease-out;
+}
+
+.celebration-emoji {
+    font-size: 64px;
+    margin-bottom: 16px;
+    animation: celebration-bounce 0.6s ease-out;
+}
+
+.celebration-text {
+    font-size: 18px;
+    color: #4B4B51;
+    font-weight: 600;
+    opacity: 0;
+    animation: celebration-text-fade 0.4s ease-out 0.3s forwards;
+}
+
+/* Animation Keyframes */
+@keyframes celebration-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes celebration-bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    40% {
+        transform: translateY(-20px) scale(1.1);
+    }
+    60% {
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+@keyframes celebration-text-fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    color: #4B4B51;
+    z-index: 1000;
+}
+
+/* Chrome extension popup optimizations */
+html, body {
+    width: 400px !important;
+    max-width: 400px !important;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 400px !important;
+    max-width: 400px !important;
+}
+
+/* Animation */
+.step {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
