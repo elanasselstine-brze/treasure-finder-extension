@@ -348,8 +348,7 @@ class OptionsManager {
                 'Task',
                 'Solution',
                 'Issue Type',
-                'Customer Impact',
-                'Effort to Fix',
+                'Priority',
                 'Has Screenshot'
             ];
 
@@ -362,8 +361,7 @@ class OptionsManager {
                     `"${item.task?.replace(/"/g, '""') || ''}"`,
                     `"${item.solution?.replace(/"/g, '""') || ''}"`,
                     item.issueType || '',
-                    item.customerImpact || '',
-                    item.effortToFix || '',
+                    item.priority || '',
                     item.hasScreenshot ? 'Yes' : 'No'
                 ].join(','))
             ].join('\n');

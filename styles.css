@@ -377,6 +377,23 @@ textarea.form-input {
     font-weight: 500;
 }
 
+.success-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.success-buttons .primary-btn {
+    width: 100%;
+    max-width: 200px;
+}
+
+.success-buttons .secondary-btn {
+    width: 100%;
+    max-width: 200px;
+}
+
 /* Utilities */
 .hidden {
     display: none !important;

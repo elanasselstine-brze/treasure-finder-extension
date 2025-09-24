@@ -36,6 +36,7 @@ class TreasureFinder {
         this.retakeBtn = document.getElementById('retakeBtn');
         this.nextBtn = document.getElementById('nextBtn');
         this.recordAnotherBtn = document.getElementById('recordAnotherBtn');
+        this.viewTicketBtn = document.getElementById('viewTicketBtn');
         this.closeBtn = document.getElementById('closeBtn');
         
         // Page selection buttons
@@ -47,8 +48,7 @@ class TreasureFinder {
         this.task = document.getElementById('task');
         this.solution = document.getElementById('solution');
         this.issueType = document.getElementById('issueType');
-        this.customerImpact = document.getElementById('customerImpact');
-        this.effortToFix = document.getElementById('effortToFix');
+        this.priority = document.getElementById('priority');
 
         // Other elements
         this.urlDisplay = document.getElementById('urlDisplay');
@@ -98,6 +98,9 @@ class TreasureFinder {
         }
         if (this.recordAnotherBtn) {
             this.recordAnotherBtn.addEventListener('click', () => this.reset());
+        }
+        if (this.viewTicketBtn) {
+            this.viewTicketBtn.addEventListener('click', () => this.openJiraTicket());
         }
         if (this.closeBtn) {
             this.closeBtn.addEventListener('click', () => window.close());
@@ -175,8 +178,24 @@ class TreasureFinder {
             this.currentStep = stepNumber;
         }
 
+        // Special handling for success step (step 5)
+        if (stepNumber === 5) {
+            this.updateSuccessScreen();
+        }
+
         // Hide error messages when changing steps
         this.hideError();
+    }
+
+    updateSuccessScreen() {
+        // Show/hide JIRA ticket button based on whether we have a JIRA result
+        if (this.viewTicketBtn) {
+            if (this.jiraResult && this.jiraResult.issueUrl) {
+                this.viewTicketBtn.classList.remove('hidden');
+            } else {
+                this.viewTicketBtn.classList.add('hidden');
+            }
+        }
     }
 
     async startScreenshot() {
@@ -596,8 +615,7 @@ class TreasureFinder {
             task: this.task.value.trim(),
             solution: this.solution.value.trim(),
             issueType: this.issueType.value,
-            customerImpact: this.customerImpact.value,
-            effortToFix: this.effortToFix.value,
+            priority: this.priority.value,
             hasScreenshot: !!this.screenshotData,
             screenshotData: this.screenshotData
         };
@@ -680,6 +698,7 @@ class TreasureFinder {
         // Reset all data
         this.screenshotData = null;
         this.issueData = {};
+        this.jiraResult = null;
         
         // Reset page selection state
         this.isWaitingForSelection = false;
@@ -702,6 +721,15 @@ class TreasureFinder {
         
         // Reload current URL
         this.loadCurrentUrl();
+    }
+
+    openJiraTicket() {
+        if (this.jiraResult && this.jiraResult.issueUrl) {
+            // Open JIRA ticket in new tab
+            chrome.tabs.create({ url: this.jiraResult.issueUrl });
+        } else {
+            console.error('No JIRA ticket URL available');
+        }
     }
 
     showError(message) {

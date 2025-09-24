@@ -120,12 +120,11 @@ class JIRAIntegration {
             console.log('💡 Task is the most universally available issue type in JIRA Cloud');
             console.log('💡 If this fails, try these alternatives with your admin: Story, Bug, Improvement');
         }
-        // Map UX issue types to JIRA priority  
+        // Map P0/P1/P2 priority to JIRA priority  
         const priorityMap = {
-            'quick win': 'Medium',
-            'UX optimization': 'Low', 
-            'redesign': 'High',
-            'unknown': 'Medium'
+            'P0': 'Highest',
+            'P1': 'High',
+            'P2': 'Medium'
         };
 
         // Create comprehensive description with all UX context
@@ -165,47 +164,20 @@ class JIRAIntegration {
                 {
                     type: "heading",
                     attrs: { level: 3 },
-                    content: [{ type: "text", text: "Impact Assessment" }]
+                    content: [{ type: "text", text: "Details" }]
                 },
                 {
-                    type: "bulletList",
+                    type: "paragraph",
                     content: [
-                        {
-                            type: "listItem",
-                            content: [
-                                {
-                                    type: "paragraph",
-                                    content: [
-                                        { type: "text", text: "👥 Customer Impact: " },
-                                        { type: "text", text: `${issueData.customerImpact}/5`, marks: [{ type: "strong" }] }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            type: "listItem", 
-                            content: [
-                                {
-                                    type: "paragraph",
-                                    content: [
-                                        { type: "text", text: "⚡ Effort to Fix: " },
-                                        { type: "text", text: `${issueData.effortToFix}/5`, marks: [{ type: "strong" }] }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            type: "listItem",
-                            content: [
-                                {
-                                    type: "paragraph", 
-                                    content: [
-                                        { type: "text", text: "🏷️ Issue Category: " },
-                                        { type: "text", text: issueData.issueType, marks: [{ type: "strong" }] }
-                                    ]
-                                }
-                            ]
-                        }
+                        { type: "text", text: "Priority: " },
+                        { type: "text", text: `${issueData.priority}`, marks: [{ type: "strong" }] }
+                    ]
+                },
+                {
+                    type: "paragraph", 
+                    content: [
+                        { type: "text", text: "Issue Category: " },
+                        { type: "text", text: issueData.issueType, marks: [{ type: "strong" }] }
                     ]
                 },
                 {
@@ -218,40 +190,29 @@ class JIRAIntegration {
             ]
         };
 
-        // Add screenshot reference note
-        description.content.splice(1, 0, {
-            type: "paragraph",
-            content: [
-                { type: "text", text: "📸 ", marks: [{ type: "strong" }] },
-                { type: "text", text: "Screenshot will be attached showing the specific issue area" }
-            ]
-        });
 
         return {
             fields: {
                 project: {
                     key: this.projectKey
                 },
-                summary: `[UX] ${issueData.summary}`,
+                summary: `[UX debt] ${issueData.summary}`,
                 description: description,
                 issuetype: {
                     name: issueTypeToUse
                 },
                 priority: {
-                    name: priorityMap[issueData.issueType] || 'Medium'
+                    name: priorityMap[issueData.priority] || 'Medium'
                 },
                 labels: [
-                    'ux-issue',
+                    'ux-debt',
                     'user-reported',
                     issueData.issueType.replace(/\s+/g, '-').toLowerCase()
                 ],
                 // Custom fields (adjust field IDs based on your JIRA setup)
                 ...(this.config.customFields && {
-                    [this.config.customFields.customerImpact]: {
-                        value: issueData.customerImpact
-                    },
-                    [this.config.customFields.effortToFix]: {
-                        value: issueData.effortToFix
+                    [this.config.customFields.priority]: {
+                        value: issueData.priority
                     },
                     [this.config.customFields.sourceUrl]: issueData.url
                 })
@@ -464,7 +425,7 @@ class JIRAIntegration {
 
         // Create form data
         const formData = new FormData();
-        formData.append('file', blob, `ux-issue-${issueKey}-${Date.now()}.png`);
+        formData.append('file', blob, `ux-debt-${issueKey}-${Date.now()}.png`);
 
         try {
             const response = await fetch(`${this.baseUrl}/rest/api/3/issue/${issueKey}/attachments`, {

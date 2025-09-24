@@ -113,31 +113,21 @@
                         rows="3"
                     ></textarea>
                     
-                    <select id="issueType" class="form-select">
-                        <option value="">Type</option>
-                        <option value="quick-win">Quick Win</option>
-                        <option value="ux-optimization">UX Optimization</option>
-                        <option value="redesign">Redesign</option>
-                        <option value="unknown">Unknown</option>
+                    <select id="issueType" class="form-select" title="Choose the type of UX debt based on scope and effort">
+                        <option value="">Type of UX Debt</option>
+                        <option value="quick-win" title="Small scope issue with clear fix, dev+designer, single sprint">Quick Win - Small scope, clear fix, single sprint</option>
+                        <option value="ux-optimization" title="Local issue (single element/screen), clear solution, 1-2 sprints">UX Optimization - Local issue, clear solution, 1-2 sprints</option>
+                        <option value="redesign" title="Multi-screen issue, sub-optimal workflow, solution not obvious">Redesign Opportunity - Multi-screen, sub-optimal, solution unclear</option>
+                        <option value="unknown" title="Issue needs further analysis to determine appropriate category">Unknown - Needs further analysis</option>
                     </select>
 
-                    <select id="customerImpact" class="form-select">
-                        <option value="">Impact on customers</option>
-                        <option value="1">1 - Very Low</option>
-                        <option value="2">2 - Low</option>
-                        <option value="3">3 - Medium</option>
-                        <option value="4">4 - High</option>
-                        <option value="5">5 - Very High</option>
+                    <select id="priority" class="form-select">
+                        <option value="">Priority</option>
+                        <option value="P0">🔴 P0 - Prevents/blocks key workflows (immediate resolution)</option>
+                        <option value="P1">🟠 P1 - Slows workflows or causes errors (prompt attention)</option>
+                        <option value="P2">🟡 P2 - Not ideal but usable (better UX, can wait)</option>
                     </select>
 
-                    <select id="effortToFix" class="form-select">
-                        <option value="">Effort to fix</option>
-                        <option value="1">1 - Very Easy</option>
-                        <option value="2">2 - Easy</option>
-                        <option value="3">3 - Medium</option>
-                        <option value="4">4 - Hard</option>
-                        <option value="5">5 - Very Hard</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="primary-btn submit-btn">Submit</button>
@@ -149,7 +139,10 @@
             <div class="success-content">
                 <h3 style="color: #4B4B51; margin-bottom: 16px;">Issue submitted!</h3>
                 <p class="success-message">Thank you for helping us improve the product.</p>
-                <button class="primary-btn" id="recordAnotherBtn">Report another issue</button>
+                <div class="success-buttons">
+                    <button class="primary-btn" id="recordAnotherBtn">Report another issue</button>
+                    <button class="secondary-btn" id="viewTicketBtn">See ticket in Jira</button>
+                </div>
             </div>
         </div>
 
