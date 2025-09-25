@@ -1,6 +1,6 @@
 # Privacy Policy for Treasure Finder
 
-*Last updated: December 27, 2024*
+*Last updated: September 25, 2025*
 
 ## Overview
 
