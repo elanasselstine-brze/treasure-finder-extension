@@ -15,19 +15,21 @@ Transform UX issue reporting into an engaging treasure hunt! A powerful Chrome b
 
 ## Installation
 
-### Option 1: Load as Unpacked Extension (Development)
+### 🌟 Chrome Web Store (Recommended)
+*Coming soon - currently under review*
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable "Developer mode" in the top right corner
-3. Click "Load unpacked" button
-4. Select the `Design debt reporter` folder
-5. The extension should appear in your extensions list and toolbar
+### 🔧 Local Installation (Current)
 
-### Option 2: Package and Install
+**Quick Start (5 minutes)**:
+1. **Download**: [GitHub ZIP](https://github.com/elanasselstine-brze/treasure-finder-extension) → "Code" → "Download ZIP"
+2. **Install**: Chrome → `chrome://extensions/` → Enable "Developer mode" → "Load unpacked" → Select folder
+3. **Configure**: Right-click 🔍 icon → "Options" → Enter JIRA settings
+4. **Use**: Click 🔍 → "Report" → Select problem area → Submit
 
-1. From `chrome://extensions/`, click "Pack extension"
-2. Select the `Design debt reporter` folder
-3. Install the generated `.crx` file
+**📖 Detailed Guides:**
+- **[Quick Install Guide](QUICK-INSTALL.md)** - 5-minute setup
+- **[Full Installation Guide](LOCAL-INSTALLATION-GUIDE.md)** - Complete instructions with troubleshooting
+- **Team Distribution** - Share these guides with your organization
 
 ## JIRA Setup
 
