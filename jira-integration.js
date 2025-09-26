@@ -176,7 +176,7 @@ class JIRAIntegration {
                 {
                     type: "paragraph", 
                     content: [
-                        { type: "text", text: "Issue Category: " },
+                        { type: "text", text: "Type of UX Debt: " },
                         { type: "text", text: issueData.issueType, marks: [{ type: "strong" }] }
                     ]
                 },
