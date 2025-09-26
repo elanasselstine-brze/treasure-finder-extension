@@ -18,7 +18,7 @@
   - **URL**: `https://brazeonmars.atlassian.net`
   - **Email**: Your Braze email
   - **API Token**: [Get from Atlassian](https://id.atlassian.com/manage-profile/security/api-tokens)
-  - **Project**: `DES`
+  - **Project**: `PDE`
 - Click **"Test Connection"** ✅
 
 ## 🎯 **4. Use**

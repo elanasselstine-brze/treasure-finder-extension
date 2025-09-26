@@ -56,7 +56,7 @@ If Elan provides a ZIP file directly:
 1. **JIRA URL**: `https://brazeonmars.atlassian.net`
 2. **Email**: Your Braze email address
 3. **API Token**: [Get your JIRA API token](https://id.atlassian.com/manage-profile/security/api-tokens)
-4. **Project Key**: `DES` (or your team's project key)
+4. **Project Key**: `PDE` (or your team's project key)
 5. **Issue Type**: `Task` (recommended)
 
 ### **3.3: Test Connection**
@@ -93,7 +93,7 @@ If Elan provides a ZIP file directly:
 ### **JIRA Connection Fails?**
 - ✅ Verify your JIRA URL is correct: `https://brazeonmars.atlassian.net`
 - ✅ Check your API token is valid and not expired
-- ✅ Confirm you have access to the DES project
+- ✅ Confirm you have access to the PDE project
 - ✅ Try the "Debug Project Info" button for detailed diagnostics
 
 ### **Screenshots Not Working?**
