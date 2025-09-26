@@ -349,6 +349,7 @@ class OptionsManager {
                 'Solution',
                 'Issue Type',
                 'Priority',
+                'UX Debt Category',
                 'Has Screenshot'
             ];
 
@@ -362,6 +363,7 @@ class OptionsManager {
                     `"${item.solution?.replace(/"/g, '""') || ''}"`,
                     item.issueType || '',
                     item.priority || '',
+                    item.uxDebtCategory || '',
                     item.hasScreenshot ? 'Yes' : 'No'
                 ].join(','))
             ].join('\n');

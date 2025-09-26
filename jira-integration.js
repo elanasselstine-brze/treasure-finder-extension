@@ -180,6 +180,13 @@ class JIRAIntegration {
                         { type: "text", text: issueData.issueType, marks: [{ type: "strong" }] }
                     ]
                 },
+                ...(issueData.uxDebtCategory ? [{
+                    type: "paragraph",
+                    content: [
+                        { type: "text", text: "UX Debt Category: " },
+                        { type: "text", text: issueData.uxDebtCategory.charAt(0).toUpperCase() + issueData.uxDebtCategory.slice(1).replace(/-/g, ' '), marks: [{ type: "strong" }] }
+                    ]
+                }] : []),
                 {
                     type: "paragraph",
                     content: [
@@ -207,7 +214,8 @@ class JIRAIntegration {
                 labels: [
                     'ux-debt',
                     'user-reported',
-                    issueData.issueType.replace(/\s+/g, '-').toLowerCase()
+                    issueData.issueType.replace(/\s+/g, '-').toLowerCase(),
+                    ...(issueData.uxDebtCategory ? [issueData.uxDebtCategory] : [])
                 ],
                 // Custom fields (adjust field IDs based on your JIRA setup)
                 ...(this.config.customFields && {

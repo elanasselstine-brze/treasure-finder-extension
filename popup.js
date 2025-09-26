@@ -49,6 +49,7 @@ class TreasureFinder {
         this.solution = document.getElementById('solution');
         this.issueType = document.getElementById('issueType');
         this.priority = document.getElementById('priority');
+        this.uxDebtCategory = document.getElementById('uxDebtCategory');
 
         // Other elements
         this.urlDisplay = document.getElementById('urlDisplay');
@@ -616,6 +617,7 @@ class TreasureFinder {
             solution: this.solution.value.trim(),
             issueType: this.issueType.value,
             priority: this.priority.value,
+            uxDebtCategory: this.uxDebtCategory.value,
             hasScreenshot: !!this.screenshotData,
             screenshotData: this.screenshotData
         };
