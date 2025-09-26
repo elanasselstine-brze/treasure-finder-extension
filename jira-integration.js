@@ -215,7 +215,8 @@ class JIRAIntegration {
                     'ux-debt',
                     'user-reported',
                     issueData.issueType.replace(/\s+/g, '-').toLowerCase(),
-                    ...(issueData.uxDebtCategory ? [issueData.uxDebtCategory] : [])
+                    ...(issueData.uxDebtCategory ? [issueData.uxDebtCategory] : []),
+                    ...(issueData.priority ? [issueData.priority.toLowerCase()] : [])
                 ],
                 // Custom fields (adjust field IDs based on your JIRA setup)
                 ...(this.config.customFields && {
