@@ -14,11 +14,12 @@
 
 ## ⚙️ **3. Configure**
 - Right-click 🔍 icon → **"Options"**
-- Enter JIRA settings:
-  - **URL**: `https://brazeonmars.atlassian.net`
-  - **Email**: Your Braze email
-  - **API Token**: [Get from Atlassian](https://id.atlassian.com/manage-profile/security/api-tokens)
-  - **Project**: `PDE`
+- JIRA settings (pre-configured for Braze):
+  - **URL**: ✅ *Already set to `https://brazeonmars.atlassian.net`*
+  - **Email**: Your Braze email *(required)*
+  - **API Token**: [Get from Atlassian](https://id.atlassian.com/manage-profile/security/api-tokens) *(required)*
+  - **Project**: ✅ *Already set to `PDE`*
+  - **Issue Type**: ✅ *Already set to `Task`*
 - Click **"Test Connection"** ✅
 
 ## 🎯 **4. Use**

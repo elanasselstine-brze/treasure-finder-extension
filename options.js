@@ -60,13 +60,27 @@ class OptionsManager {
             // JIRA is the only integration option now
             this.jiraSection.classList.remove('hidden');
 
-            // Load JIRA settings
+            // Define Braze-specific defaults
+            const brazeDefaults = {
+                jiraUrl: 'https://brazeonmars.atlassian.net',
+                projectKey: 'PDE',
+                issueType: 'Task'
+            };
+
+            // Load JIRA settings with Braze defaults
             if (integrationConfig.jiraConfig) {
-                this.jiraUrl.value = integrationConfig.jiraConfig.jiraUrl || '';
+                this.jiraUrl.value = integrationConfig.jiraConfig.jiraUrl || brazeDefaults.jiraUrl;
                 this.jiraEmail.value = integrationConfig.jiraConfig.email || '';
                 this.jiraApiToken.value = integrationConfig.jiraConfig.apiToken || '';
-                this.jiraProject.value = integrationConfig.jiraConfig.projectKey || '';
-                this.jiraIssueType.value = integrationConfig.jiraConfig.issueType || 'Bug';
+                this.jiraProject.value = integrationConfig.jiraConfig.projectKey || brazeDefaults.projectKey;
+                this.jiraIssueType.value = integrationConfig.jiraConfig.issueType || brazeDefaults.issueType;
+            } else {
+                // First-time setup with Braze defaults
+                this.jiraUrl.value = brazeDefaults.jiraUrl;
+                this.jiraEmail.value = '';
+                this.jiraApiToken.value = '';
+                this.jiraProject.value = brazeDefaults.projectKey;
+                this.jiraIssueType.value = brazeDefaults.issueType;
             }
 
         } catch (error) {

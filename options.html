@@ -28,10 +28,11 @@
                         type="url" 
                         id="jiraUrl" 
                         class="form-input"
-                        placeholder="https://yourcompany.atlassian.net"
+                        placeholder="https://brazeonmars.atlassian.net"
+                        value="https://brazeonmars.atlassian.net"
                     >
                     <div class="help-text">
-                        Your JIRA Cloud URL (e.g., https://yourcompany.atlassian.net)
+                        Your JIRA Cloud URL (pre-configured for Braze)
                     </div>
                 </div>
 
@@ -69,11 +70,12 @@
                         type="text" 
                         id="jiraProject" 
                         class="form-input"
-                        placeholder="PROJ"
+                        placeholder="PDE"
+                        value="PDE"
                         style="text-transform: uppercase;"
                     >
                     <div class="help-text">
-                        JIRA project key (e.g., PROJ, UX, BUG)
+                        JIRA project key (pre-configured for Braze PDE project)
                     </div>
                 </div>
 
@@ -81,12 +83,12 @@
                     <label for="jiraIssueType">Issue Type:</label>
                     <select id="jiraIssueType" class="form-input">
                         <option value="Bug">Bug</option>
-                        <option value="Task">Task</option>
+                        <option value="Task" selected>Task</option>
                         <option value="Story">Story</option>
                         <option value="Improvement">Improvement</option>
                     </select>
                     <div class="help-text">
-                        JIRA issue type for UX issues
+                        JIRA issue type for UX issues (pre-configured for Task)
                     </div>
                 </div>
 
