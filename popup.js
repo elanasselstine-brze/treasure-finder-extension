@@ -617,7 +617,7 @@ class TreasureFinder {
             solution: this.solution.value.trim(),
             issueType: this.issueType.value,
             priority: this.priority.value,
-            uxDebtCategory: this.uxDebtCategory.value,
+            uxDebtCategory: Array.from(this.uxDebtCategory.selectedOptions).map(option => option.value),
             hasScreenshot: !!this.screenshotData,
             screenshotData: this.screenshotData
         };

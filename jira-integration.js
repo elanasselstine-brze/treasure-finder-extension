@@ -180,11 +180,11 @@ class JIRAIntegration {
                         { type: "text", text: issueData.issueType, marks: [{ type: "strong" }] }
                     ]
                 },
-                ...(issueData.uxDebtCategory ? [{
+                ...(issueData.uxDebtCategory && issueData.uxDebtCategory.length > 0 ? [{
                     type: "paragraph",
                     content: [
                         { type: "text", text: "UX Debt Category: " },
-                        { type: "text", text: issueData.uxDebtCategory.charAt(0).toUpperCase() + issueData.uxDebtCategory.slice(1).replace(/-/g, ' '), marks: [{ type: "strong" }] }
+                        { type: "text", text: issueData.uxDebtCategory.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ')).join(', '), marks: [{ type: "strong" }] }
                     ]
                 }] : []),
                 {
@@ -215,7 +215,7 @@ class JIRAIntegration {
                     'ux-debt',
                     'user-reported',
                     issueData.issueType.replace(/\s+/g, '-').toLowerCase(),
-                    ...(issueData.uxDebtCategory ? [issueData.uxDebtCategory] : []),
+                    ...(issueData.uxDebtCategory && issueData.uxDebtCategory.length > 0 ? issueData.uxDebtCategory : []),
                     ...(issueData.priority ? [issueData.priority.toLowerCase()] : [])
                 ],
                 // Custom fields (adjust field IDs based on your JIRA setup)

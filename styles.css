@@ -347,8 +347,36 @@ body {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
+/* Multi-select specific styling */
+.form-select[multiple] {
+    min-height: 120px;
+    padding: 8px;
+    background-image: none; /* Remove dropdown arrow */
+}
+
+.form-select[multiple] option {
+    padding: 8px 12px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-select[multiple] option:checked {
+    background: #6366f1 !important;
+    color: white !important;
+}
+
 .form-input::placeholder {
     color: #9ca3af;
+    font-style: italic;
+}
+
+/* Help text styling */
+.help-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: -8px;
+    margin-bottom: 12px;
     font-style: italic;
 }
 

@@ -377,7 +377,7 @@ class OptionsManager {
                     `"${item.solution?.replace(/"/g, '""') || ''}"`,
                     item.issueType || '',
                     item.priority || '',
-                    item.uxDebtCategory || '',
+                    Array.isArray(item.uxDebtCategory) ? item.uxDebtCategory.join('; ') : (item.uxDebtCategory || ''),
                     item.hasScreenshot ? 'Yes' : 'No'
                 ].join(','))
             ].join('\n');
