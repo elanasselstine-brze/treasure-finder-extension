@@ -128,40 +128,14 @@
                         <option value="P2">🟡 P2 - Not ideal but usable (better UX, can wait)</option>
                     </select>
 
-                    <div class="custom-dropdown" id="uxDebtCategoryDropdown">
-                        <div class="dropdown-button" id="uxDebtCategoryButton">
-                            <span class="dropdown-text">UX Debt Category</span>
-                            <span class="dropdown-arrow">▼</span>
-                        </div>
-                        <div class="dropdown-options" id="uxDebtCategoryOptions">
-                            <label class="checkbox-option">
-                                <input type="checkbox" value="usability" title="Complex forms, nested architecture that obscures features">
-                                <span class="checkmark"></span>
-                                <span class="option-text">Usability - Navigation & interaction challenges</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" value="visual-design" title="Inconsistent buttons, varied component sizes, mixed typography">
-                                <span class="checkmark"></span>
-                                <span class="option-text">Visual Design - Inconsistent colors, logos, typography</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" value="accessibility" title="Low contrast, small text, poor alt text for images">
-                                <span class="checkmark"></span>
-                                <span class="option-text">Accessibility - Barriers for users with disabilities</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" value="content" title="Inconsistent capitalization, mixed terminology, conflicting info">
-                                <span class="checkmark"></span>
-                                <span class="option-text">Content - Outdated, unclear, or inconsistent text</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" value="performance" title="Slow loading, laggy scrolling, poor animations">
-                                <span class="checkmark"></span>
-                                <span class="option-text">Performance - Speed & responsiveness issues</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="help-text">💡 Click to select multiple categories</div>
+                    <select id="uxDebtCategory" class="form-select" multiple title="Select one or more types of UX debt (Ctrl/Cmd+click to select multiple)">
+                        <option value="usability" title="Complex forms, nested architecture that obscures features">Usability - Navigation & interaction challenges</option>
+                        <option value="visual-design" title="Inconsistent buttons, varied component sizes, mixed typography">Visual Design - Inconsistent colors, logos, typography</option>
+                        <option value="accessibility" title="Low contrast, small text, poor alt text for images">Accessibility - Barriers for users with disabilities</option>
+                        <option value="content" title="Inconsistent capitalization, mixed terminology, conflicting info">Content - Outdated, unclear, or inconsistent text</option>
+                        <option value="performance" title="Slow loading, laggy scrolling, poor animations">Performance - Speed & responsiveness issues</option>
+                    </select>
+                    <div class="help-text">💡 Hold Ctrl/Cmd to select multiple categories</div>
 
                 </div>
 

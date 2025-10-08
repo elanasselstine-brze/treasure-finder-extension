@@ -49,10 +49,7 @@ class TreasureFinder {
         this.solution = document.getElementById('solution');
         this.issueType = document.getElementById('issueType');
         this.priority = document.getElementById('priority');
-        // UX Debt Category dropdown elements
-        this.uxDebtCategoryDropdown = document.getElementById('uxDebtCategoryDropdown');
-        this.uxDebtCategoryButton = document.getElementById('uxDebtCategoryButton');
-        this.uxDebtCategoryOptions = document.getElementById('uxDebtCategoryOptions');
+        this.uxDebtCategory = document.getElementById('uxDebtCategory');
 
         // Other elements
         this.urlDisplay = document.getElementById('urlDisplay');
@@ -118,8 +115,6 @@ class TreasureFinder {
             this.cancelSelectionBtn.addEventListener('click', () => this.cancelPageSelection());
         }
 
-        // UX Debt Category dropdown event listeners
-        this.setupUXDebtCategoryDropdown();
         
         // Test message reception capability
         this.testMessageReception();
@@ -622,75 +617,12 @@ class TreasureFinder {
             solution: this.solution.value.trim(),
             issueType: this.issueType.value,
             priority: this.priority.value,
-            uxDebtCategory: this.getSelectedUXDebtCategories(),
+            uxDebtCategory: Array.from(this.uxDebtCategory.selectedOptions).map(option => option.value),
             hasScreenshot: !!this.screenshotData,
             screenshotData: this.screenshotData
         };
     }
 
-    // UX Debt Category Dropdown Methods
-    setupUXDebtCategoryDropdown() {
-        if (!this.uxDebtCategoryButton || !this.uxDebtCategoryOptions) return;
-        
-        // Button click to toggle dropdown
-        this.uxDebtCategoryButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleDropdown();
-        });
-        
-        // Checkbox change events
-        const checkboxes = this.uxDebtCategoryOptions.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.updateDropdownButtonText();
-            });
-        });
-        
-        // Click outside to close dropdown
-        document.addEventListener('click', (e) => {
-            if (!this.uxDebtCategoryDropdown.contains(e.target)) {
-                this.closeDropdown();
-            }
-        });
-    }
-    
-    toggleDropdown() {
-        const isOpen = this.uxDebtCategoryDropdown.classList.contains('open');
-        if (isOpen) {
-            this.closeDropdown();
-        } else {
-            this.openDropdown();
-        }
-    }
-    
-    openDropdown() {
-        this.uxDebtCategoryDropdown.classList.add('open');
-    }
-    
-    closeDropdown() {
-        this.uxDebtCategoryDropdown.classList.remove('open');
-    }
-    
-    updateDropdownButtonText() {
-        const selected = this.getSelectedUXDebtCategories();
-        const dropdownText = this.uxDebtCategoryButton.querySelector('.dropdown-text');
-        
-        if (selected.length === 0) {
-            dropdownText.textContent = 'UX Debt Category';
-            dropdownText.classList.add('placeholder');
-        } else {
-            const categoryNames = selected.map(cat => {
-                return cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ');
-            });
-            dropdownText.textContent = categoryNames.join(', ');
-            dropdownText.classList.remove('placeholder');
-        }
-    }
-    
-    getSelectedUXDebtCategories() {
-        const checkboxes = this.uxDebtCategoryOptions.querySelectorAll('input[type="checkbox"]:checked');
-        return Array.from(checkboxes).map(checkbox => checkbox.value);
-    }
 
     async storeLocally() {
         // Store the issue data locally if external service is not configured

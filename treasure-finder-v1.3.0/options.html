@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Finder - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💎 Treasure Finder Settings</h1>
+            <p class="subtitle">Configure issue tracking integration</p>
+        </header>
+
+        <div class="content">
+
+            <!-- JIRA Configuration -->
+            <div class="section jira-config" id="jiraSection">
+                <h2>JIRA Configuration</h2>
+                <p class="description">
+                    Configure direct JIRA integration to create professional issues with screenshots.
+                </p>
+
+                <div class="form-group">
+                    <label for="jiraUrl">JIRA Cloud URL:</label>
+                    <input 
+                        type="url" 
+                        id="jiraUrl" 
+                        class="form-input"
+                        placeholder="https://brazeonmars.atlassian.net"
+                        value="https://brazeonmars.atlassian.net"
+                    >
+                    <div class="help-text">
+                        Your JIRA Cloud URL (pre-configured for Braze)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraEmail">Email:</label>
+                    <input 
+                        type="email" 
+                        id="jiraEmail" 
+                        class="form-input"
+                        placeholder="your-email@company.com"
+                    >
+                    <div class="help-text">
+                        Your JIRA Cloud account email address
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraApiToken">API Token:</label>
+                    <input 
+                        type="password" 
+                        id="jiraApiToken" 
+                        class="form-input"
+                        placeholder="Your JIRA API token"
+                    >
+                    <div class="help-text">
+                        <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">
+                            Create API token here ↗
+                        </a> (Required for JIRA Cloud)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraProject">Project Key:</label>
+                    <input 
+                        type="text" 
+                        id="jiraProject" 
+                        class="form-input"
+                        placeholder="PDE"
+                        value="PDE"
+                        style="text-transform: uppercase;"
+                    >
+                    <div class="help-text">
+                        JIRA project key (pre-configured for Braze PDE project)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jiraIssueType">Issue Type:</label>
+                    <select id="jiraIssueType" class="form-input">
+                        <option value="Bug">Bug</option>
+                        <option value="Task" selected>Task</option>
+                        <option value="Story">Story</option>
+                        <option value="Improvement">Improvement</option>
+                    </select>
+                    <div class="help-text">
+                        JIRA issue type for UX issues (pre-configured for Task)
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="primary-btn" id="saveBtn">Save Settings</button>
+                    <button type="button" id="testJIRABtn" class="test-btn">Test JIRA Connection</button>
+                    <button type="button" id="debugJIRABtn" class="test-btn" style="margin-left: 10px;">🔍 Debug Project Info</button>
+                    <button type="button" id="testIssueBtn" class="test-btn" style="margin-left: 10px;">🧪 Test Issue Types</button>
+                </div>
+
+                <div class="status-message hidden" id="statusMessage"></div>
+            </div>
+
+
+
+            <div class="section">
+                <h2>Local Data</h2>
+                <p class="description">
+                    If JIRA is not configured, issues are stored locally in the browser.
+                </p>
+                
+                <div class="button-group">
+                    <button type="button" class="secondary-btn" id="exportBtn">Export Local Data</button>
+                    <button type="button" class="danger-btn" id="clearBtn">Clear Local Data</button>
+                </div>
+
+                <div class="data-count">
+                    <span id="dataCount">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="jira-integration.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>
